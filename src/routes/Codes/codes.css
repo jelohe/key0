@@ -8,7 +8,6 @@
   text-align: left;
   margin-bottom: 40px;
 }
-
 .codes h1 {
   font-size: 36px;
   font-weight: 900;
@@ -16,19 +15,7 @@
   margin: 0;
 }
 
-.codes .topbar select {
-  background: none;
-  border: none;
-  color: var(--fg);
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  cursor: pointer;
-  margin-left: 12px;
-}
-
 .codes .keys-list {
-  list-style: none;
   padding: 0;
   margin: 0;
   display: flex;
@@ -40,66 +27,19 @@
   border: 2px solid var(--line);
   padding: 16px;
   display: flex;
-  gap: 12px;
   flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
   background: var(--bg);
 }
-
 .codes .key-item span {
   font-weight: 700;
   font-size: 18px;
 }
-
 .codes .key-item p {
-  font-weight: 200;
+  font-weight: 300;
   font-size: 12px;
-  color: var(--fg);
+  color: var(--muted);
 }
-
-.codes .actions {
-  flex: 0 0 auto;
-  display: flex;
-  gap: 18px;
-  flex-direction: column;
-  align-items: end;
-}
-
-.codes .key-item code {
-  background: var(--line);
-  display: inline-block;
-  padding: 4px 8px;
-  font-family: monospace;
-  font-size: 18px;
-  color: var(--accent);
-}
-
-.codes .actions button {
-  background: none;
-  border: 2px solid var(--fg);
-  color: var(--fg);
-  font-weight: 700;
-  padding: 6px 12px;
-  cursor: pointer;
-  margin-left: 8px;
-}
-
-.codes .actions button:active {
-  background: var(--fg);
-  color: var(--bg);
-}
-
-.codes .add-key {
-  display: flex;
-  gap: 18px;
-  margin-top: 32px;
-  float: right;
-  width: 100%;
-}
-
 .codes .key-item .name {
-  width: 20px;
   display: flex;
   flex-direction: column;
   flex: 1 1 0;
@@ -112,7 +52,43 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+.codes .key-item code {
+  background: var(--line);
+  display: inline-block;
+  padding: 4px 8px;
+  font-family: monospace;
+  font-size: 18px;
+  color: var(--accent);
+}
 
+.codes .actions {
+  flex: 0 0 auto;
+  display: flex;
+  gap: 18px;
+  flex-direction: column;
+  align-items: end;
+}
+.codes .actions button {
+  background: none;
+  border: 2px solid var(--fg);
+  color: var(--fg);
+  font-weight: 700;
+  padding: 6px 12px;
+  cursor: pointer;
+  margin-left: 8px;
+}
+.codes .actions button:active {
+  background: var(--fg);
+  color: var(--bg);
+}
+
+.codes .add-key {
+  display: flex;
+  gap: 18px;
+  margin-top: 32px;
+  float: right;
+  width: 100%;
+}
 .codes .add-key button {
   border: 2px solid var(--fg);
   background: none;
@@ -122,7 +98,6 @@
   cursor: pointer;
   width: 100%;
 }
-
 .codes .add-key button:active {
   background: var(--fg);
   color: var(--bg);

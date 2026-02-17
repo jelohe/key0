@@ -31,6 +31,10 @@
   gap: 26px;
 }
 
+.backups details {
+  padding: 0;
+  margin: 0;
+}
 .backups summary {
   list-style: none;
   cursor: pointer;
@@ -46,7 +50,7 @@
 
 .key-item summary::after {
   background: none;
-  content: "show";
+  content: "Show";
   font-size: 12px;
   border: 2px solid var(--fg);
   color: var(--fg);
@@ -57,7 +61,7 @@
 }
 
 .key-item[open] summary::after {
-  content: "hide";
+  content: "Hide";
 }
 
 .key-item summary:active::after {
@@ -69,7 +73,6 @@
   border: 2px solid var(--line);
   padding: 16px;
   display: flex;
-  gap: 12px;
   flex-direction: column;
   justify-content: space-between;
   align-items: start;
@@ -82,9 +85,9 @@
 }
 
 .backups .key-item p {
-  font-weight: 200;
+  font-weight: 300;
   font-size: 12px;
-  color: var(--fg);
+  color: var(--muted);
 }
 
 .backups .go-back {
