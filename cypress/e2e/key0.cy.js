@@ -16,7 +16,7 @@ describe('happy path', () => {
 
     // Saves the secret
     cy.get('[data-testid="save-secret"]').click();
-    cy.location('pathname').should('eq', '/codes');
+    cy.location('pathname').should('eq', '/keys');
 
     // Finds the secret
     cy.contains(fixtureIssuer);

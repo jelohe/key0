@@ -92,6 +92,7 @@
 
 .backups .go-back {
   margin-top: 32px;
+  margin-bottom: 64px;
   float: right;
   width: 50%;
 }

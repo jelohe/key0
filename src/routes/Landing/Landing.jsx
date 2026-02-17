@@ -9,7 +9,7 @@ export default function Landing() {
   const hasSecrets = vault && vault.length > 0;
 
   function handleCta() {
-    if (hasSecrets) navigate("/codes");
+    if (hasSecrets) navigate("/keys");
     else navigate("/scan")
   }
 

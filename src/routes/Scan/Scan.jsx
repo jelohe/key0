@@ -24,11 +24,11 @@ export default function Scan() {
   function handleSave() {
     store(secret);
     setSecret(null);
-    navigate("/codes");
+    navigate("/keys");
   }
 
   function handleCancel() {
-    if (hasSecrets) navigate("/codes");
+    if (hasSecrets) navigate("/keys");
     else navigate("/")
   }
 

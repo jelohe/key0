@@ -41,7 +41,7 @@ export default function Codes() {
       </div>
 
       <div className="go-back">
-        <button onClick={() => navigate("/codes")}>Back</button>
+        <button onClick={() => navigate("/keys")}>Back</button>
       </div>
     </div>
   );
