@@ -20,6 +20,7 @@ function Code({ secret }) {
       <div className="qr-wrapper">
         <QRCode value={uri} />
       </div>
+      <p>{code}</p>
     </details>
   );
 }
