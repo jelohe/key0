@@ -17,6 +17,7 @@ function Code({ secret }) {
       <summary>
         <div><span>{app}</span><p>{name}</p></div>
       </summary>
+      <hr />
       <div className="qr-wrapper">
         <QRCode value={uri} />
       </div>

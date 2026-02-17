@@ -132,3 +132,9 @@
   margin-top: 16px;
   background: var(--fg);
 }
+
+.backups hr {
+  margin: 18px 0 36px 0;
+  padding: 0;
+  border: 1px solid var(--line);
+}
