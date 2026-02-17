@@ -12,7 +12,7 @@ export default function Scan() {
   const hasSecrets = vault && vault.length > 0;
 
   const handleScan = uris => {
-    const secretFound = parseUris(uris[0]);
+    const secretFound = parse(uris[0]);
     if (validate(secretFound))
       setSecret(secretFound);
   };
@@ -55,7 +55,8 @@ export default function Scan() {
       {secret && (
         <div className="actions">
           <button onClick={handleReject}>Reject</button>
-          <button onClick={handleSave}>Save</button>
+          <button data-testid="save-secret" onClick={handleSave}>Save
+        </button>
         </div>
       )}
     </div>

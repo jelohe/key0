@@ -47,7 +47,7 @@ export default function Landing() {
       </section>
 
       <section className="cta">
-        <button onClick={handleCta}>Run KEYØ</button>
+        <button data-testid="run-key0" onClick={handleCta}>Run KEYØ</button>
       </section>
 
       <footer>

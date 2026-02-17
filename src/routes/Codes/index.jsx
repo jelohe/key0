@@ -30,10 +30,10 @@ function Code({ secret }) {
         <p>{name}</p>
       </div>
       <div className="actions">
-        <code>{ tempKey }</code>
+        <code data-testid="key">{ tempKey }</code>
         <div>
           <button onClick={handleCopy}>Copy</button>
-          <button onClick={handleDelete}>Delete</button>
+          <button data-testid="remove" onClick={handleDelete}>Delete</button>
         </div>
       </div>
     </li>

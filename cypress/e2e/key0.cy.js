@@ -1,13 +1,32 @@
-describe('When opening the app for the first time', () => {
-  it('scans a QR and shows it on the list', () => {
+describe('happy path', () => {
+  it('critical functionality works', () => {
+    // Opens landing page
     cy.visit('https://localhost:3000');
-    cy.contains('Secret');
-    cy.contains('Code');
+    cy.contains('KEYØ');
 
-    cy.get('[data-testid="scan-first-qr"').click();
+    // Opens the app
+    cy.get('[data-testid="run-key0"').click();
+    cy.location('pathname').should('eq', '/scan');
 
-    // Reads the fixture QR from `cypress/fixtures/key0-qr.mjpeg`
-    const fixtureIssuer = 'KEY0';
+    // Scans the fixture QR from `cypress/fixtures/key0-qr.mjpeg`
+    const fixtureIssuer = 'TopoTestSecret';
+    const fixtureName = 'Topo:topo-user';
     cy.contains(fixtureIssuer);
+    cy.contains(fixtureName);
+
+    // Saves the secret
+    cy.get('[data-testid="save-secret"]').click();
+    cy.location('pathname').should('eq', '/codes');
+
+    // Finds the secret
+    cy.contains(fixtureIssuer);
+    cy.contains(fixtureName);
+    cy.get('[data-testid="key"]').should('exist');
+
+    // Removes the secret
+    cy.get('[data-testid="remove"]').click();
+    cy.contains(fixtureIssuer).should('not.exist');
+    cy.contains(fixtureName).should('not.exist');
+    cy.get('[data-testid="key"]').should('not.exist');
   })
 })
