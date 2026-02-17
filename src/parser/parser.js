@@ -1,5 +1,4 @@
-export const parseUris = (uris) => uris.map(parseUri);
-export function parseUri(uri) {
+export function parse(uri) {
   if (!uri.rawValue) return {};
 
   const url = new URL(uri.rawValue);
@@ -13,4 +12,13 @@ export function parseUri(uri) {
     name,
     code,
   };
+}
+
+export function validate(secret) {
+  return !!(
+    secret &&
+    secret.name &&
+    secret.app &&
+    secret.code
+  )
 }

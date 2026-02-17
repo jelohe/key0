@@ -2,25 +2,19 @@ import { useNavigate } from 'react-router';
 import { useState } from 'react';
 import useVault from '@/useVault';
 import Scanner from './Scanner';
-import { parseUris } from '@/parser';
+import { parse, validate } from '@/parser';
 import './scan.css';
 
 export default function Scan() {
   const navigate = useNavigate();
   const { store, vault } = useVault();
-  const [secret, setSecret] = useState(null);
+  const [secret, setSecret] = useState();
   const hasSecrets = vault && vault.length > 0;
 
   const handleScan = uris => {
-    const url = parseUris(uris)[0];
-    const isValid = (
-      url &&
-      url.name &&
-      url.app &&
-      url.code
-    )
-
-    if (isValid) setSecret(url);
+    const secretFound = parseUris(uris[0]);
+    if (validate(secretFound))
+      setSecret(secretFound);
   };
 
   function handleReject() {

@@ -1,45 +1,73 @@
 import { renderHook, act } from "@testing-library/react";
 import { beforeEach, describe, it, expect } from "vitest";
-import { parseUri, parseUris } from './parser.js';
+import { parse, validate } from './parser.js';
 
 describe('uri parser',() => {
   const key0Secret = "OQYHAM3U"
-  const topeteSecret = "ORSXG5A="
 
   beforeEach(() => {
     window.localStorage.clear();
   });
 
-  it('parses a valid uri', () => {
-    const uri = 
-      { rawValue: `otpauth://totp/janwan?issuer=key0&secret=${key0Secret}`};
+  describe('parse', () => {
+    it('parses a valid uri', () => {
+      const uri = 
+        { rawValue: `otpauth://totp/janwan?issuer=key0&secret=${key0Secret}`};
 
-    const expectedSecret = {
-      app: "key0",
-      name: "janwan",
-      code: key0Secret,
-    }
+      const expectedSecret = {
+        app: "key0",
+        name: "janwan",
+        code: key0Secret,
+      }
 
-    expect(parseUri(uri)).toEqual(expectedSecret);
+      expect(parse(uri)).toEqual(expectedSecret);
+    });
   });
 
-  it('parses a list of valid uris', () => {
-    const uris = [
-      { rawValue: `otpauth://totp/janwan?issuer=key0&secret=${key0Secret}` },
-      { rawValue: `otpauth://totp/jantu?issuer=topete&secret=${topeteSecret}`},
-    ];
+  describe('validate', () => {
+    it('returns true if the secret is valid', () => {
+      const secret = {
+        app: "key0",
+        name: "janwan",
+        code: key0Secret,
+      };
 
-    const expectedSecrets = [{
-      app: "key0",
-      name: "janwan",
-      code: key0Secret,
-    },
-    {
-      app: "topete",
-      name: "jantu",
-      code: topeteSecret,
-    }];
+      expect(validate(secret)).toEqual(true);
+    });
 
-    expect(parseUris(uris)).toEqual(expectedSecrets);
+    it('returns false if secret is missing app', () => {
+      const secret = { name: "janwan", code: key0Secret };
+      expect(validate(secret)).toEqual(false);
+    });
+
+    it('returns false if secret is missing name', () => {
+      const secret = { app: "key0", code: key0Secret };
+      expect(validate(secret)).toEqual(false);
+    });
+
+    it('returns false if secret is missing code', () => {
+      const secret = { app: "key0", name: "janwan" };
+      expect(validate(secret)).toEqual(false);
+    });
+
+    it('returns false if secret has only app', () => {
+      const secret = { app: "key0" };
+      expect(validate(secret)).toEqual(false);
+    });
+
+    it('returns false if secret has only name', () => {
+      const secret = { name: "janwan" };
+      expect(validate(secret)).toEqual(false);
+    });
+
+    it('returns false if secret has only code', () => {
+      const secret = { code: key0Secret };
+      expect(validate(secret)).toEqual(false);
+    });
+
+    it('returns false if secret is empty', () => {
+      const secret = {};
+      expect(validate(secret)).toEqual(false);
+    });
   });
 });
