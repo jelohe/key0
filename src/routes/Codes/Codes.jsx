@@ -11,6 +11,7 @@ function Code({ secret }) {
   const { app, name, code } = secret;
   const { remove } = useVault();
   const [tempKey, setTempKey] = useState(() => generateRawCode(code));
+  const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -20,7 +21,8 @@ function Code({ secret }) {
     return () => clearInterval(interval);
   }, [code]);
 
-  const handleDelete = () => remove(secret);
+  const handleConfirm = () => remove(secret);
+  const handleDelete = () => setIsDeleting(true);
   const handleCopy = () => navigator.clipboard.writeText(tempKey);
 
   return (
@@ -33,7 +35,16 @@ function Code({ secret }) {
         <code data-testid="key">{ tempKey }</code>
         <div>
           <button onClick={handleCopy}>Copy</button>
-          <button data-testid="remove" onClick={handleDelete}>Delete</button>
+          { !isDeleting &&
+            <button data-testid="remove" onClick={handleDelete}>Delete</button>
+          }
+          { isDeleting &&
+            <button
+              className="red-text"
+              data-testid="confirm-remove"
+              onClick={handleConfirm}
+            >Confirm</button>
+          }
         </div>
       </div>
     </li>

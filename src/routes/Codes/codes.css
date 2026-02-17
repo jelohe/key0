@@ -102,3 +102,6 @@
   background: var(--fg);
   color: var(--bg);
 }
+.codes .red-text {
+  color: red !important;
+}

@@ -25,6 +25,7 @@ describe('happy path', () => {
 
     // Removes the secret
     cy.get('[data-testid="remove"]').click();
+    cy.get('[data-testid="confirm-remove"]').click();
     cy.contains(fixtureIssuer).should('not.exist');
     cy.contains(fixtureName).should('not.exist');
     cy.get('[data-testid="key"]').should('not.exist');
