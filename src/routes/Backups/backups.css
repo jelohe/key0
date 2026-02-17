@@ -1,0 +1,130 @@
+.backups.container {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 24px 16px;
+}
+
+.backups header {
+  text-align: left;
+  margin-bottom: 40px;
+}
+
+.backups h1 {
+  font-size: 36px;
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  margin: 0;
+}
+
+.backups .list {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+
+.backups .keys-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+
+.backups summary {
+  list-style: none;
+  cursor: pointer;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: space-between;
+}
+
+.key-item summary::after {
+  background: none;
+  content: "show";
+  font-size: 12px;
+  border: 2px solid var(--fg);
+  color: var(--fg);
+  font-weight: 700;
+  padding: 6px 12px;
+  cursor: pointer;
+  margin-left: 8px;
+}
+
+.key-item[open] summary::after {
+  content: "hide";
+}
+
+.key-item summary:active::after {
+  background: var(--fg);
+  color: var(--bg);
+}
+
+.backups .key-item {
+  border: 2px solid var(--line);
+  padding: 16px;
+  display: flex;
+  gap: 12px;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: start;
+  background: var(--bg);
+}
+
+.backups .key-item span {
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.backups .key-item p {
+  font-weight: 200;
+  font-size: 12px;
+  color: var(--fg);
+}
+
+.backups .go-back {
+  margin-top: 32px;
+  float: right;
+  width: 50%;
+}
+
+.backups .key-item .name {
+  width: 20px;
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 0;
+  min-width: 0;
+}
+.backups .key-item .name > p,
+.backups .key-item .name > span {
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.backups .go-back button {
+  border: 2px solid var(--fg);
+  background: none;
+  color: var(--fg);
+  font-weight: 700;
+  padding: 12px 16px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.backups .go-back button:active {
+  background: var(--fg);
+  color: var(--bg);
+}
+
+.backups .qr-wrapper {
+  padding: 10px;
+  margin-bottom: 30px;
+  background: var(--fg);
+}

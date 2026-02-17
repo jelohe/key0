@@ -91,9 +91,11 @@
 }
 
 .codes .add-key {
+  display: flex;
+  gap: 18px;
   margin-top: 32px;
   float: right;
-  width: 50%;
+  width: 100%;
 }
 
 .codes .key-item .name {

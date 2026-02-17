@@ -55,6 +55,7 @@ export default function Codes() {
       </ul>
 
       <div className="add-key">
+        <button onClick={() => navigate("/backups")}>Backups</button>
         <button onClick={() => navigate("/scan")}>Add</button>
       </div>
     </div>
