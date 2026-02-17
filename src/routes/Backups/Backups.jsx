@@ -1,14 +1,9 @@
 import './backups.css';
-import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import useVault from '@/useVault';
-import { TOTP } from 'totp-generator';
 import QRCode from 'react-qr-code';
 
-const REGENERATION_SECONDS = 30;
-const REGENERATION_MILISECONDS = REGENERATION_SECONDS * 1000;
-
-function Code({ secret }) {
+function Backup({ secret }) {
   const { app, name, code } = secret;
   const uri = `otpauth://totp/${name}?issuer=${app}&secret=${code}`;
 
@@ -26,7 +21,7 @@ function Code({ secret }) {
   );
 }
 
-export default function Codes() {
+export default function Backups() {
   const navigate = useNavigate();
   const { vault } = useVault();
 
@@ -37,7 +32,7 @@ export default function Codes() {
       </header>
 
       <div className="list">
-        {vault.map(s => <Code key={s.name + s.app} secret={s} />)}
+        {vault.map(s => <Backup key={s.name + s.app} secret={s} />)}
       </div>
 
       <div className="go-back">
@@ -45,10 +40,4 @@ export default function Codes() {
       </div>
     </div>
   );
-}
-
-function generateRawCode(secret) {
-  const config = { encoding: 'ascii', period: REGENERATION_SECONDS };
-  const { otp: code } = TOTP.generate(secret, config);
-  return code;
 }
