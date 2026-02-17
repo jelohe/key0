@@ -13,7 +13,14 @@ export default function Scan() {
 
   const handleScan = uris => {
     const url = parseUris(uris)[0];
-    if (url) setSecret(url);
+    const isValid = (
+      url &&
+      url.name &&
+      url.app &&
+      url.code
+    )
+
+    if (isValid) setSecret(url);
   };
 
   function handleReject() {

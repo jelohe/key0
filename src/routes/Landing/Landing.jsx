@@ -24,7 +24,7 @@ export default function Landing() {
         <ul>
           <li>ZERO SERVERS</li>
           <li>ZERO TRACKING</li>
-          <li>ZERO FRICTION</li>
+          <li>ZERØ FRICTION</li>
         </ul>
       </section>
 
@@ -40,9 +40,9 @@ export default function Landing() {
       <section className="block">
         <h2>Limits</h2>
         <div className="stack">
-          <p>No cross-device sync. Intentionally.</p>
-          <p>Backup your QRs or suffer the consequences.</p>
-          <p>Your secrets are as safe as your device.</p>
+          <p>No cross-device syncing. Intentionally.</p>
+          <p>Back up your QRs or suffer the consequences.</p>
+          <p>Keep your device safe.</p>
         </div>
       </section>
 
