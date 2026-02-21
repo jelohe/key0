@@ -24,6 +24,7 @@ function Code({ secret }) {
   const handleConfirm = () => remove(secret);
   const handleDelete = () => setIsDeleting(true);
   const handleCopy = () => navigator.clipboard.writeText(tempKey);
+  const handleBack = () => setIsDeleting(false);
 
   return (
     <li className="key-item">
@@ -34,9 +35,14 @@ function Code({ secret }) {
       <div className="actions">
         <code data-testid="key">{ tempKey }</code>
         <div>
-          <button onClick={handleCopy}>Copy</button>
+          { !isDeleting &&
+            <button onClick={handleCopy}>Copy</button>
+          }
           { !isDeleting &&
             <button data-testid="remove" onClick={handleDelete}>Delete</button>
+          }
+          { isDeleting &&
+            <button onClick={handleBack}>Back</button>
           }
           { isDeleting &&
             <button

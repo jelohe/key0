@@ -22,8 +22,8 @@ export default function Landing() {
 
       <section className="block">
         <ul>
-          <li>ZERO SERVERS</li>
-          <li>ZERO TRACKING</li>
+          <li>ZERØ SERVERS</li>
+          <li>ZERØ TRACKING</li>
           <li>ZERØ FRICTION</li>
         </ul>
       </section>
