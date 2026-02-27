@@ -1,11 +1,12 @@
 import { useLocalStorage } from '@uidotdev/usehooks'
+import { validate } from '@/parser';
 
 function secretExists(secret, vault = []) {
   const exists = vault.find(({ app, name }) =>
     app == secret.app && name === secret.name
   );
 
-  return exists;
+  return exists || false;
 }
 
 export default function useVault() {
@@ -15,8 +16,7 @@ export default function useVault() {
     vault,
 
     store: function(secret) {
-      const isValid =
-        (secret.name && secret.app && secret.code)
+      const isValid = validate(secret);
       const exists = secretExists(secret, vault);
 
       if (isValid && !exists)

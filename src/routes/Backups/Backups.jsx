@@ -1,6 +1,7 @@
 import './backups.css';
 import { useNavigate } from 'react-router';
 import useVault from '@/useVault';
+import useI18n from '@/useI18n';
 import QRCode from 'react-qr-code';
 
 function Backup({ secret }) {
@@ -22,13 +23,15 @@ function Backup({ secret }) {
 }
 
 export default function Backups() {
+  const { t, LangSelector, lang, setLang } = useI18n();
   const navigate = useNavigate();
   const { vault } = useVault();
 
   return (
     <div className="backups container">
-      <header>
-        <h1>BACKUPS</h1>
+      <header className="topbar">
+        <h1>{t("backups.title")}</h1>
+        <LangSelector lang={lang} setLang={setLang} />
       </header>
 
       <div className="list">
@@ -36,7 +39,7 @@ export default function Backups() {
       </div>
 
       <div className="go-back">
-        <button onClick={() => navigate("/keys")}>Back</button>
+        <button onClick={() => navigate("/keys")}>{t("backups.back-button")}</button>
       </div>
     </div>
   );

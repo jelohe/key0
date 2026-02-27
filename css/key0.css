@@ -22,3 +22,34 @@ body {
 .is-hidden {
   display: none;
 }
+
+a,
+select {
+  color: var(--muted);
+  background: none;
+  border: none;
+  text-decoration: none;
+  border-bottom: 1px solid var(--line);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin: 0;
+  padding: 0;
+}
+
+select {
+  appearance: none;
+  cursor: pointer;
+}
+
+option {
+  background-color: var(--bg);
+  cursor: pointer;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+}

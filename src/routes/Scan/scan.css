@@ -130,3 +130,7 @@
   color: var(--accent);
   text-transform: uppercase;
 }
+
+.red-text {
+  color: red !important;
+}

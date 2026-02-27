@@ -16,7 +16,7 @@ function open(el) {
         el.onplaying = () => resolve(el);
       })
       .catch(err => {
-        console.log(err);
+        console.error(err);
         reject(err)
       });
   });
