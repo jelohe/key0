@@ -2,12 +2,13 @@ import { useState } from 'react';
 import { useLocalStorage } from '@uidotdev/usehooks'
 import en from './en';
 import es from './es';
+import tok from './tok';
 
 const DEFAULT_LANG = 'en';
 
 export default function useI18n() {
   const [lang, setLang] = useLocalStorage('lang', DEFAULT_LANG);
-  const translations = { en, es };
+  const translations = { en, es, tok };
 
   return {
     lang,
@@ -32,6 +33,7 @@ const LangSelector = function({ lang, setLang }) {
     >
       <option value="en">en</option>
       <option value="es">es</option>
+      <option value="tok">tok</option>
     </select>
   );
 }

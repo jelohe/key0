@@ -28,9 +28,9 @@ export default function Landing() {
 
       <section className="block">
         <ul>
-          <li>ZERØ SERVERS</li>
-          <li>ZERØ TRACKING</li>
-          <li>ZERØ FRICTION</li>
+          <li>{t('landing.zero.servers')}</li>
+          <li>{t('landing.zero.tracking')}</li>
+          <li>{t('landing.zero.friction')}</li>
         </ul>
       </section>
 

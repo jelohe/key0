@@ -1,8 +1,8 @@
 export default {
   "landing.subtitle": "Verificador en dos pasos. Mínimo por fuerza.",
-  "landing.zero.servers": "ZERØ SERVIDORES",
-  "landing.zero.tracking": "ZERØ RASTREO",
-  "landing.zero.friction": "ZERØ FRICCIÓN",
+  "landing.zero.servers": "CERØ SERVIDORES",
+  "landing.zero.tracking": "CERØ RASTREO",
+  "landing.zero.friction": "CERØ FRICCIÓN",
   "landing.why": "Motivos",
   "landing.why.first": "Otros rastrean. Otros sincronizan. Otros monetizan.",
   "landing.why.second": "KEYØ se niega a todo esto.",
@@ -28,10 +28,10 @@ export default {
 
   "codes.title": "CLAVES",
   "codes.backups-button": "Copias de seguridad",
-  "codes.add-button": "Agregar",
+  "codes.add-button": "Nuevo",
   "codes.copy-button": "Copiar",
-  "codes.delete-button": "Eliminar",
-  "codes.confirm-button": "Confirmar",
+  "codes.delete-button": "Borrar",
+  "codes.confirm-button": "Borrar",
   "codes.back-button": "Volver",
 
   "backups.title": "COPIAS DE SEGURIDAD",
