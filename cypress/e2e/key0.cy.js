@@ -1,7 +1,9 @@
 describe('happy path', () => {
-  it('critical functionality works', () => {
+  it('scans and stores a secret, creates a temporal code and removes the secret', () => {
     // Opens landing page
-    cy.visit('https://localhost:3000');
+    cy.visit('https://localhost:3000', {
+      onBeforeLoad: loadPolyfills
+    })
     cy.contains('KEYØ');
 
     // Opens the app
@@ -31,3 +33,8 @@ describe('happy path', () => {
     cy.get('[data-testid="key"]').should('not.exist');
   })
 })
+
+async function loadPolyfills(win) {
+  await import('barcode-detector/polyfill')
+  win.BarcodeDetector = win.BarcodeDetector || window.BarcodeDetector
+}
