@@ -34,6 +34,7 @@ describe('happy path', () => {
   })
 })
 
+
 async function loadPolyfills(win) {
   await import('barcode-detector/polyfill')
   win.BarcodeDetector = win.BarcodeDetector || window.BarcodeDetector
