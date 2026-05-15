@@ -1,16 +1,21 @@
 .landing.container {
+  min-height: 100vh;
+  max-width: 480px;
   margin: 0 auto;
-  padding: 32px 24px 96px;
-  max-width: 1200px;
-}
-
-/* ---------- Header ---------- */
-
-.landing header {
-  margin-bottom: 96px;
   display: flex;
   flex-direction: column;
-  align-items: end;
+  padding: 32px 24px;
+}
+
+.landing .topbar {
+  margin-bottom: 0;
+}
+
+.landing main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .landing h1 {
@@ -21,65 +26,14 @@
 }
 
 .landing .tagline {
-  font-size: clamp(20px, 3vw, 32px);
+  font-size: clamp(16px, 2.5vw, 24px);
   color: var(--muted);
+  margin: 8px 0 0 0;
   max-width: 420px;
-  text-align: right;
 }
-
-.landing .topbar {
-  margin-bottom: 64px;
-}
-
-/* ---------- Sections ---------- */
-
-.landing section {
-  margin-bottom: 96px;
-}
-
-.landing .block {
-  border-top: 3px solid var(--fg);
-  padding-top: 24px;
-}
-
-.landing h2 {
-  font-size: 14px;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.16em;
-  margin: 0 0 24px 0;
-}
-
-.landing ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.landing li {
-  font-size: clamp(20px, 3vw, 32px);
-  font-weight: 700;
-  padding: 20px 0;
-}
-
-.landing .stack {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 24px;
-  max-width: 520px;
-}
-
-.landing p {
-  font-size: 16px;
-  color: var(--muted);
-  margin: 0;
-}
-
-/* ---------- CTA ---------- */
 
 .landing .cta {
-  cursor: pointer;
-  margin-top: 128px;
+  margin-top: 48px;
   max-width: 420px;
 }
 
@@ -101,33 +55,4 @@
 .landing .cta button:active {
   background: var(--fg);
   color: var(--bg);
-}
-
-/* ---------- Footer ---------- */
-
-.landing footer {
-  margin-top: 160px;
-  padding-top: 32px;
-  border-top: 1px solid var(--line);
-  font-size: 13px;
-  color: var(--muted);
-  max-width: 420px;
-}
-
-/* ---------- Desktop ---------- */
-
-@media (min-width: 900px) {
-  .landing .block {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 64px;
-  }
-
-  .landing ul {
-    max-width: 480px;
-  }
-
-  .landing .stack {
-    max-width: 640px;
-  }
 }

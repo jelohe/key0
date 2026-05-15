@@ -58,7 +58,7 @@
   padding: 4px 8px;
   font-family: monospace;
   font-size: 18px;
-  color: var(--accent);
+  color: var(--fg);
 }
 
 .codes .actions {
@@ -103,5 +103,5 @@
   color: var(--bg);
 }
 .codes .red-text {
-  color: red !important;
+  color: var(--fg);
 }

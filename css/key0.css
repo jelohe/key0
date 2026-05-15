@@ -1,9 +1,8 @@
 :root {
-  --bg: #0a0a0a;
-  --fg: #ffffff;
-  --muted: #b3b3b3;
-  --line: #222222;
-  --accent: #00ff9c;
+  --bg: #ffffff;
+  --fg: #0a0a0a;
+  --muted: #666666;
+  --line: #d0d0d0;
 }
 
 * {
@@ -43,7 +42,6 @@ select {
 }
 
 option {
-  background-color: var(--bg);
   cursor: pointer;
 }
 

@@ -21,46 +21,15 @@ export default function Landing() {
         <a target="_blank" href="https://github.com/jelohe/key0">github</a>
         <LangSelector lang={lang} setLang={setLang} />
       </div>
-      <header>
+      <main>
         <h1>KEYØ</h1>
-        <p className="tagline">{t('landing.subtitle')}</p>
-      </header>
-
-      <section className="block">
-        <ul>
-          <li>{t('landing.zero.servers')}</li>
-          <li>{t('landing.zero.tracking')}</li>
-          <li>{t('landing.zero.friction')}</li>
-        </ul>
-      </section>
-
-      <section className="block">
-        <h2>{t('landing.why')}</h2>
-        <div className="stack">
-          <p>{t('landing.why.first')}</p>
-          <p>{t('landing.why.second')}</p>
-          <p>{t('landing.why.third')}</p>
-        </div>
-      </section>
-
-      <section className="block">
-        <h2>{t("landing.limits")}</h2>
-        <div className="stack">
-          <p>{t("landing.limits.first")}</p>
-          <p>{t("landing.limits.second")}</p>
-          <p>{t("landing.limits.third")}</p>
-        </div>
-      </section>
-
-      <section className="cta">
-        <button data-testid="run-key0" onClick={handleCta}>
-          {t("landing.cta")}
-        </button>
-      </section>
-
-      <footer>
-        <p>{t("landing.footer")}</p>
-      </footer>
-    </div> 
+        <p className="tagline">{t('landing.tagline')}</p>
+        <section className="cta">
+          <button data-testid="run-key0" onClick={handleCta}>
+            {t("landing.cta")}
+          </button>
+        </section>
+      </main>
+    </div>
   );
 }
