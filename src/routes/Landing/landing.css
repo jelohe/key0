@@ -11,6 +11,33 @@
   margin-bottom: 0;
 }
 
+.landing .topbar-left {
+  display: flex;
+  align-items: center;
+}
+
+.landing .topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.landing .github-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--muted);
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  transition: color 0.15s, background 0.15s;
+}
+.landing .github-link:hover {
+  color: var(--fg);
+  background: var(--bg-alt);
+}
+
 .landing main {
   flex: 1;
   display: flex;
@@ -19,40 +46,53 @@
 }
 
 .landing h1 {
-  font-size: clamp(44px, 18vw, 96px);
+  font-size: clamp(48px, 18vw, 96px);
   font-weight: 900;
   letter-spacing: -0.06em;
   margin: 0;
+  line-height: 1;
 }
 
 .landing .tagline {
-  font-size: clamp(16px, 2.5vw, 24px);
-  color: var(--muted);
-  margin: 8px 0 0 0;
+  font-size: clamp(16px, 2.5vw, 22px);
+  color: var(--fg-secondary);
+  margin: 12px 0 0 0;
   max-width: 420px;
+  font-weight: 500;
 }
 
 .landing .cta {
-  margin-top: 48px;
+  margin-top: 40px;
   max-width: 420px;
 }
 
 .landing .cta button {
-  background-color: var(--bg);
-  border: 4px solid var(--fg);
-  color: var(--fg);
+  background: var(--primary);
+  border: none;
+  color: #ffffff;
   cursor: pointer;
   display: block;
-  font-size: 20px;
-  font-weight: 900;
-  letter-spacing: 0.04em;
-  padding: 24px 0;
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  padding: 16px 0;
   text-align: center;
   text-decoration: none;
   width: 100%;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  transition: background 0.15s, box-shadow 0.15s, transform 0.1s;
+}
+
+.landing .cta button:hover {
+  background: var(--primary-hover);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
 }
 
 .landing .cta button:active {
-  background: var(--fg);
-  color: var(--bg);
+  transform: scale(0.98);
+}
+
+.landing .trust-badges {
+  margin-top: 32px;
 }
