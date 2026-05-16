@@ -48,10 +48,11 @@
 
 .landing h1 {
   font-size: clamp(48px, 18vw, 96px);
-  font-weight: 900;
+  font-weight: 800;
   letter-spacing: -0.06em;
   margin: 0;
   line-height: 1;
+  color: var(--fg);
 }
 
 .landing .tagline {
@@ -68,32 +69,33 @@
 }
 
 .landing .cta button {
+  display: block;
+  width: 100%;
+  padding: 14px 0;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  /* Leverages .btn-primary base styling but fills the width */
   background: var(--primary);
   border: none;
   color: #ffffff;
   cursor: pointer;
-  display: block;
-  font-size: 17px;
-  font-weight: 700;
-  letter-spacing: 0.03em;
-  padding: 16px 0;
   text-align: center;
   text-decoration: none;
-  width: 100%;
   border-radius: var(--radius);
-  box-shadow: var(--shadow-md);
-  transition: background 0.15s, box-shadow 0.15s, transform 0.1s;
+  transition: background 0.12s, transform 0.08s;
 }
 
 .landing .cta button:hover {
   background: var(--primary-hover);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
 }
 
 .landing .cta button:active {
-  transform: scale(0.98);
+  transform: scale(0.97);
 }
 
 .landing .trust-badges {
-  margin-top: 32px;
+  margin-top: 40px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
 }
