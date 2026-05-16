@@ -7,7 +7,7 @@ import ThemeToggle from '@/ThemeToggle';
 import { TOTP } from 'totp-generator';
 
 const REGENERATION_SECONDS = 30;
-const REGENERATION_MILISECONDS = REGENERATION_SECONDS * 1000;
+const REGENERATION_MILLISECONDS = REGENERATION_SECONDS * 1000;
 const COPY_FEEDBACK_MS = 1500;
 
 export default function Codes() {
@@ -25,21 +25,23 @@ export default function Codes() {
         </div>
       </header>
 
-      {vault.length === 0 && (
-        <div className="codes-empty">
-          <svg className="empty-icon" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4" />
-          </svg>
-          <p>{t('codes.empty')}</p>
-          <button className="btn-primary" onClick={() => navigate("/scan")}>
-            {t('codes.add-button')}
-          </button>
-        </div>
-      )}
+      <div className="codes-body">
+        {vault.length === 0 && (
+          <div className="codes-empty">
+            <svg className="empty-icon" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4" />
+            </svg>
+            <p>{t('codes.empty')}</p>
+            <button className="btn-primary" onClick={() => navigate("/scan")}>
+              {t('codes.add-button')}
+            </button>
+          </div>
+        )}
 
-      <ul className="keys-list">
-        {vault.map(s => <Code key={s.name + s.app} secret={s} />)}
-      </ul>
+        <ul className="keys-list">
+          {vault.map(s => <Code key={s.name + '|' + s.app} secret={s} />)}
+        </ul>
+      </div>
 
       {vault.length > 0 && (
         <div className="add-key">
@@ -69,7 +71,7 @@ function Code({ secret }) {
     const interval = setInterval(() => {
       setTempKey(generateRawCode(code));
       setTimeLeft(REGENERATION_SECONDS);
-    }, REGENERATION_MILISECONDS);
+    }, REGENERATION_MILLISECONDS);
 
     const countdown = setInterval(() => {
       setTimeLeft(t => Math.max(0, t - 1));
@@ -84,7 +86,7 @@ function Code({ secret }) {
   const handleConfirm = () => remove(secret);
   const handleDelete = () => setStage('confirm');
   const handleCopy = useCallback(() => {
-    navigator.clipboard.writeText(tempKey);
+    navigator.clipboard.writeText(tempKey).catch(() => {});
     setCopied(true);
     if (copyTimer.current) clearTimeout(copyTimer.current);
     copyTimer.current = setTimeout(() => setCopied(false), COPY_FEEDBACK_MS);

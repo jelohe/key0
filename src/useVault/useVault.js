@@ -3,7 +3,7 @@ import { validate } from '@/parser';
 
 function secretExists(secret, vault = []) {
   const exists = vault.find(({ app, name }) =>
-    app == secret.app && name === secret.name
+    app === secret.app && name === secret.name
   );
 
   return exists || false;
@@ -16,19 +16,19 @@ export default function useVault() {
     vault,
 
     store: function(secret) {
-      const isValid = validate(secret);
-      const exists = secretExists(secret, vault);
-
-      if (isValid && !exists)
-        setVault([ ...vault, secret ]);
+      if (!validate(secret)) return;
+      setVault(current => {
+        if (secretExists(secret, current)) return current;
+        return [...current, secret];
+      });
     },
 
     remove: function({ name, app }) {
-      const isValid = name && app;
-      const exists = secretExists({ name, app }, vault);
-      const newVault = vault.filter(s => (s.name !== name || s.app !== app));
-
-      if (isValid && exists) setVault(newVault);
+      if (!name || !app) return;
+      setVault(current => {
+        if (!secretExists({ name, app }, current)) return current;
+        return current.filter(s => s.name !== name || s.app !== app);
+      });
     },
   };
 }

@@ -1,9 +1,14 @@
 export function parse(uri) {
-  if (!uri.rawValue) return {};
+  if (!uri || !uri.rawValue) return {};
 
-  const url = new URL(uri.rawValue);
+  let url;
+  try {
+    url = new URL(uri.rawValue);
+  } catch {
+    return {};
+  }
 
-  const name = url.pathname.replace("/", "");
+  const name = url.pathname.replace(/^\/+/, "");
   const app = url.searchParams.get("issuer");
   const code = url.searchParams.get("secret");
 

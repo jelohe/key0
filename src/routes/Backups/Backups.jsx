@@ -9,7 +9,7 @@ import QRCode from 'react-qr-code';
 function Backup({ secret }) {
   const { t } = useI18n();
   const { app, name, code } = secret;
-  const uri = `otpauth://totp/${name}?issuer=${app}&secret=${code}`;
+  const uri = `otpauth://totp/${encodeURIComponent(name)}?issuer=${encodeURIComponent(app)}&secret=${encodeURIComponent(code)}`;
   const [stage, setStage] = useState('hidden');
 
   return (
@@ -92,25 +92,27 @@ export default function Backups() {
         </div>
       </header>
 
-      {vault.length === 0 && (
-        <div className="backups-empty">
-          <svg className="empty-icon" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-            <line x1="12" y1="11" x2="12" y2="15" />
-            <line x1="11" y1="13" x2="13" y2="13" />
-          </svg>
-          <p>{t('backups.empty')}</p>
-          <button className="btn-primary" onClick={() => navigate("/scan")}>
-            {t('codes.add-button')}
-          </button>
-        </div>
-      )}
+      <div className="backups-body">
+        {vault.length === 0 && (
+          <div className="backups-empty">
+            <svg className="empty-icon" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+              <line x1="12" y1="11" x2="12" y2="15" />
+              <line x1="11" y1="13" x2="13" y2="13" />
+            </svg>
+            <p>{t('backups.empty')}</p>
+            <button className="btn-primary" onClick={() => navigate("/scan")}>
+              {t('codes.add-button')}
+            </button>
+          </div>
+        )}
 
-      {vault.length > 0 && (
-        <div className="backups-list">
-          {vault.map(s => <Backup key={s.name + s.app} secret={s} />)}
-        </div>
-      )}
+        {vault.length > 0 && (
+          <div className="backups-list">
+            {vault.map(s => <Backup key={s.name + '|' + s.app} secret={s} />)}
+          </div>
+        )}
+      </div>
 
       {vault.length > 0 && (
         <div className="backups-actions">

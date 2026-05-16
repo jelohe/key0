@@ -1,7 +1,10 @@
 .backups.container {
   max-width: 480px;
   margin: 0 auto;
-  padding: 24px 16px;
+  padding: 24px 16px 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
 }
 
 .backups header {
@@ -28,6 +31,12 @@
   gap: 16px;
 }
 
+.backups-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
 .backups-empty {
   text-align: center;
   padding: 80px 24px;
@@ -35,6 +44,8 @@
   flex-direction: column;
   align-items: center;
   gap: 16px;
+  flex: 1;
+  justify-content: center;
 }
 
 .backups-empty .empty-icon {
@@ -210,7 +221,12 @@
 }
 
 .backups-actions {
-  margin-top: 32px;
+  margin-top: auto;
+  padding: 12px 0 24px;
+  background: var(--bg);
+  position: sticky;
+  bottom: 0;
+  z-index: 10;
 }
 
 .backups-actions button {

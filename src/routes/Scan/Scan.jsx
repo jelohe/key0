@@ -14,6 +14,7 @@ export default function Scan() {
   const [secret, setSecret] = useState();
 
   const handleScan = uris => {
+    if (!uris || uris.length === 0) return;
     const secretFound = parse(uris[0]);
     if (validate(secretFound))
       setSecret(secretFound);
@@ -43,15 +44,15 @@ export default function Scan() {
         </div>
       </header>
 
-      <div className="scanner-frame">
-        {secret && <Found app={secret.app} name={secret.name} />}
-        {!secret &&
-          <Scanner Loading={Loading} Error={Error} onScan={handleScan} />
-        }
-      </div>
+      <div className="scan-body">
+        <div className="scanner-frame">
+          {secret && <Found app={secret.app} name={secret.name} />}
+          {!secret &&
+            <Scanner Loading={Loading} Error={Error} onScan={handleScan} />
+          }
+        </div>
 
-      {!secret && (
-        <>
+        {!secret && (
           <div className="scan-info">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
@@ -59,19 +60,9 @@ export default function Scan() {
             </svg>
             <span>{t("scan.instructions")}</span>
           </div>
-          <div className="actions">
-            <button className="btn-secondary" onClick={handleCancel}>
-              {t('scan.cancel-button')}
-            </button>
-            <button className="btn-primary">
-              {t("scan.scan-button")}
-            </button>
-          </div>
-        </>
-      )}
+        )}
 
-      {secret && (
-        <>
+        {secret && (
           <div className="warning-box">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
@@ -80,16 +71,31 @@ export default function Scan() {
             </svg>
             <span>{t("scan.warning")}</span>
           </div>
-          <div className="actions">
+        )}
+      </div>
+
+      <div className="actions" style={{ marginTop: 'auto' }}>
+        {!secret && (
+          <>
+            <button className="btn-secondary" onClick={handleCancel}>
+              {t('scan.cancel-button')}
+            </button>
+            <button className="btn-primary">
+              {t("scan.scan-button")}
+            </button>
+          </>
+        )}
+        {secret && (
+          <>
             <button className="btn-secondary" onClick={handleReject}>
               {t("scan.reject-button")}
             </button>
             <button className="btn-primary" data-testid="save-secret" onClick={handleSave}>
               {t("scan.save-button")}
             </button>
-          </div>
-        </>
-      )}
+          </>
+        )}
+      </div>
     </div>
   );
 }

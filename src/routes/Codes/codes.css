@@ -1,7 +1,10 @@
 .codes.container {
   max-width: 480px;
   margin: 0 auto;
-  padding: 24px 16px;
+  padding: 24px 16px 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
 }
 
 .codes header {
@@ -22,6 +25,12 @@
   margin: 0;
 }
 
+.codes-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
 .codes .keys-list {
   padding: 0;
   margin: 0;
@@ -29,6 +38,7 @@
   flex-direction: column;
   gap: 16px;
   list-style: none;
+  flex: 1;
 }
 
 .codes .key-item {
@@ -183,7 +193,12 @@
 .codes .add-key {
   display: flex;
   gap: 12px;
-  margin-top: 24px;
+  margin-top: auto;
+  padding: 12px 0 24px;
+  background: var(--bg);
+  position: sticky;
+  bottom: 0;
+  z-index: 10;
 }
 .codes .add-key button {
   flex: 1;
@@ -199,6 +214,8 @@
   flex-direction: column;
   align-items: center;
   gap: 16px;
+  flex: 1;
+  justify-content: center;
 }
 
 .codes .codes-empty .empty-icon {
