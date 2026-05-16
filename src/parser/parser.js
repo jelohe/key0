@@ -8,9 +8,20 @@ export function parse(uri) {
     return {};
   }
 
-  const name = url.pathname.replace(/^\/+/, "");
-  const app = url.searchParams.get("issuer");
+  let name = url.pathname.replace(/^\/+/, "");
+  try {
+    name = decodeURIComponent(name);
+  } catch {
+    // leave as-is if decoding fails
+  }
   const code = url.searchParams.get("secret");
+  let app = url.searchParams.get("issuer");
+
+  const colonIndex = name.indexOf(":");
+  if (colonIndex !== -1) {
+    if (!app) app = name.slice(0, colonIndex);
+    name = name.slice(colonIndex + 1);
+  }
 
   return {
     app,
