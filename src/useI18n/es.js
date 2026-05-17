@@ -1,6 +1,6 @@
 export default {
   "landing.tagline": "Dos factores. Cero servidores.",
-  "landing.cta": "Abrir Claves",
+  "landing.cta": "Empezar",
 
   "scan.title": "Escáner",
   "scan.instructions": "Escanea solo códigos QR en los que confíes.",

@@ -180,6 +180,7 @@
 }
 
 .codes .add-key {
+  transition: background 0.1s;
   display: flex;
   gap: 10px;
   margin-top: auto;

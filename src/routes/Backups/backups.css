@@ -181,6 +181,7 @@
 }
 
 .backups-actions {
+  transition: background 0.1s;
   margin-top: auto;
   padding: 12px 0 24px;
   background: var(--bg);
