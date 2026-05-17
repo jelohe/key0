@@ -1,6 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
-<svg fill="#ffffff" width="800px" height="800px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg">
-<title>square</title>
-<path d="M0.75 0.75v30.5h30.5v-30.5zM28.75 28.75h-25.5v-25.5h25.5z"></path>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1e3a5f"/>
+      <stop offset="100%" stop-color="#2c5282"/>
+    </linearGradient>
+  </defs>
+  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" fill="url(#g)"/>
+  <circle cx="12" cy="11" r="3.5" stroke="#fff" stroke-width="1.2" fill="none"/>
+  <line x1="9.5" y1="8" x2="14.5" y2="14" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/>
 </svg>

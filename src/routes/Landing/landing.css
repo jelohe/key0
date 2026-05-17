@@ -1,133 +1,101 @@
 .landing.container {
+  min-height: 100dvh;
+  max-width: 480px;
   margin: 0 auto;
-  padding: 32px 24px 96px;
-  max-width: 1200px;
-}
-
-/* ---------- Header ---------- */
-
-.landing header {
-  margin-bottom: 96px;
   display: flex;
   flex-direction: column;
-  align-items: end;
-}
-
-.landing h1 {
-  font-size: clamp(44px, 18vw, 96px);
-  font-weight: 900;
-  letter-spacing: -0.06em;
-  margin: 0;
-}
-
-.landing .tagline {
-  font-size: clamp(20px, 3vw, 32px);
-  color: var(--muted);
-  max-width: 420px;
-  text-align: right;
+  padding: 32px 24px;
 }
 
 .landing .topbar {
-  margin-bottom: 64px;
+  margin-bottom: 0;
 }
 
-/* ---------- Sections ---------- */
-
-.landing section {
-  margin-bottom: 96px;
+.landing .topbar-left {
+  display: flex;
+  align-items: center;
 }
 
-.landing .block {
-  border-top: 3px solid var(--fg);
-  padding-top: 24px;
+.landing .topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
 
-.landing h2 {
-  font-size: 14px;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.16em;
-  margin: 0 0 24px 0;
-}
-
-.landing ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.landing li {
-  font-size: clamp(20px, 3vw, 32px);
-  font-weight: 700;
-  padding: 20px 0;
-}
-
-.landing .stack {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 24px;
-  max-width: 520px;
-}
-
-.landing p {
-  font-size: 16px;
+.landing .github-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
   color: var(--muted);
-  margin: 0;
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  transition: color 0.15s, background 0.15s;
+}
+.landing .github-link:hover {
+  color: var(--fg);
+  background: var(--bg-alt);
 }
 
-/* ---------- CTA ---------- */
+.landing main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-bottom: 48px;
+}
+
+.landing h1 {
+  font-size: clamp(48px, 18vw, 96px);
+  font-weight: 800;
+  letter-spacing: -0.06em;
+  margin: 0;
+  line-height: 1;
+  color: var(--fg);
+}
+
+.landing .tagline {
+  font-size: clamp(16px, 2.5vw, 22px);
+  color: var(--fg-secondary);
+  margin: 12px 0 0 0;
+  max-width: 420px;
+  font-weight: 500;
+}
 
 .landing .cta {
-  cursor: pointer;
-  margin-top: 128px;
+  margin-top: 40px;
   max-width: 420px;
 }
 
 .landing .cta button {
-  background-color: var(--bg);
-  border: 4px solid var(--fg);
-  color: var(--fg);
-  cursor: pointer;
   display: block;
-  font-size: 20px;
-  font-weight: 900;
-  letter-spacing: 0.04em;
-  padding: 24px 0;
+  width: 100%;
+  padding: 14px 0;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  /* Leverages .btn-primary base styling but fills the width */
+  background: var(--primary);
+  border: none;
+  color: #ffffff;
+  cursor: pointer;
   text-align: center;
   text-decoration: none;
-  width: 100%;
+  border-radius: var(--radius);
+  transition: background 0.12s, transform 0.08s;
+}
+
+.landing .cta button:hover {
+  background: var(--primary-hover);
 }
 
 .landing .cta button:active {
-  background: var(--fg);
-  color: var(--bg);
+  transform: scale(0.97);
 }
 
-/* ---------- Footer ---------- */
-
-.landing footer {
-  margin-top: 160px;
-  padding-top: 32px;
+.landing .trust-badges {
+  margin-top: 40px;
+  padding-top: 24px;
   border-top: 1px solid var(--line);
-  font-size: 13px;
-  color: var(--muted);
-  max-width: 420px;
-}
-
-/* ---------- Desktop ---------- */
-
-@media (min-width: 900px) {
-  .landing .block {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 64px;
-  }
-
-  .landing ul {
-    max-width: 480px;
-  }
-
-  .landing .stack {
-    max-width: 640px;
-  }
 }

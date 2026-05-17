@@ -20,10 +20,18 @@ function open(el) {
   });
 }
 
-function scan(el) {
-  const config = { formats: ["qr_code"], };
-  const barcodeDetector = new BarcodeDetector(config);
-  return barcodeDetector.detect(el);
+async function scan(el) {
+  const BarcodeDetector = window.BarcodeDetector;
+  if (!BarcodeDetector) {
+    try {
+      const mod = await import('barcode-detector/polyfill');
+      window.BarcodeDetector = window.BarcodeDetector || mod.BarcodeDetector;
+    } catch {
+      throw new Error('BarcodeDetector not available in this browser');
+    }
+  }
+  const detector = new window.BarcodeDetector({ formats: ["qr_code"] });
+  return detector.detect(el);
 }
 
 export default { open, scan };
