@@ -271,6 +271,35 @@ describe('Backups Page', () => {
       cy.contains('button', 'Show Secret').should('be.visible');
     });
 
+    it("shows a Download button when the secret is revealed", () => {
+      cy.contains("button", "Show Secret").click();
+      cy.contains("button", "Show Secret").click(); // proceed past warning
+      cy.contains("button", "Download").should("be.visible");
+    });
+
+    it("Download button has a download icon SVG", () => {
+      cy.contains("button", "Show Secret").click();
+      cy.contains("button", "Show Secret").click();
+      cy.get(".backup-download-actions svg").should("exist");
+    });
+
+    it("triggers a QR image download when clicked", () => {
+      cy.window().then((win) => {
+        cy.stub(win.URL, "createObjectURL").callsFake(() => "blob:mock-" + Date.now());
+        cy.stub(win.URL, "revokeObjectURL").returns(undefined);
+      });
+
+      cy.contains("button", "Show Secret").click();
+      cy.contains("button", "Show Secret").click();
+
+      cy.contains("button", "Download").click();
+
+      // Should create object URLs for the SVG blob and eventually the PNG
+      cy.window().its("URL.createObjectURL").should("have.been.called");
+    });
+
+
+
     it('"Back to Keys" button navigates to /keys', () => {
       cy.contains('button', 'Back to Keys').click();
       cy.location('pathname').should('eq', '/keys');

@@ -31,6 +31,9 @@ export default {
   "backups.reveal-warning": "Cualquiera con este secreto puede generar códigos. Comparte solo con personas de confianza.",
   "backups.reveal-cancel": "Cancelar",
   "backups.reveal-proceed": "Mostrar secreto",
+  "backups.show-secret": "Mostrar secreto",
+  "backups.hide-secret": "Ocultar secreto",
+  "backups.download": "Descargar",
 
   "footer.client-side": "100% del lado del cliente",
   "footer.privacy": "Tus secretos nunca salen de este dispositivo.",

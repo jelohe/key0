@@ -194,3 +194,15 @@
   padding: 10px 0;
   font-size: 13px;
 }
+
+.backup-download-actions {
+  padding: 0 16px 16px;
+  display: flex;
+  justify-content: center;
+}
+
+.backup-download-actions button {
+  width: 100%;
+  padding: 7px 12px;
+  font-size: 12px;
+}

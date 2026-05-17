@@ -31,6 +31,9 @@ export default {
   "backups.reveal-warning": "Anyone with this secret can generate codes. Only share with trusted parties.",
   "backups.reveal-cancel": "Cancel",
   "backups.reveal-proceed": "Show Secret",
+  "backups.show-secret": "Show Secret",
+  "backups.hide-secret": "Hide Secret",
+  "backups.download": "Download",
 
   "footer.client-side": "100% client-side",
   "footer.privacy": "Your secrets never leave this device.",
