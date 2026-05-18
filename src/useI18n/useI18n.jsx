@@ -2,11 +2,16 @@ import { useLocalStorage } from '@uidotdev/usehooks'
 import en from './en';
 import es from './es';
 
-const DEFAULT_LANG = 'en';
+const translations = { en, es };
+const SUPPORTED_LANGS = Object.keys(translations);
+
+function browserLang() {
+  const lang = navigator.language?.slice(0, 2);
+  return SUPPORTED_LANGS.includes(lang) ? lang : 'en';
+}
 
 export default function useI18n() {
-  const [lang, setLang] = useLocalStorage('lang', DEFAULT_LANG);
-  const translations = { en, es };
+  const [lang, setLang] = useLocalStorage('lang', browserLang());
 
   return {
     lang,
@@ -15,7 +20,7 @@ export default function useI18n() {
     t: function(name) {
       return (
         translations[lang][name] ||
-        translations[DEFAULT_LANG][name]
+        translations['en'][name]
       );
     },
   }

@@ -415,6 +415,51 @@ describe('Language Selector', () => {
     cy.get('select').should('have.value', 'es');
     cy.contains('Dos factores. Cero servidores.').should('be.visible');
   });
+
+  it('shows Spanish when browser language is Spanish and no stored language', () => {
+    cy.clearAllLocalStorage();
+    cy.visit(BASE, {
+      onBeforeLoad(win) {
+        Object.defineProperty(win.navigator, 'language', {
+          value: 'es',
+          configurable: true,
+        });
+      },
+    });
+    cy.get('select').should('have.value', 'es');
+    cy.contains('Dos factores. Cero servidores.').should('be.visible');
+    cy.contains('button', 'Empezar').should('be.visible');
+  });
+
+  it('stored language takes precedence over browser language', () => {
+    cy.visit(BASE, {
+      onBeforeLoad(win) {
+        win.localStorage.setItem('lang', JSON.stringify('en'));
+        Object.defineProperty(win.navigator, 'language', {
+          value: 'es',
+          configurable: true,
+        });
+      },
+    });
+    cy.get('select').should('have.value', 'en');
+    cy.contains('Two-factor. Zero servers.').should('be.visible');
+    cy.contains('button', 'Start').should('be.visible');
+  });
+
+  it('falls back to English when browser language is unsupported', () => {
+    cy.clearAllLocalStorage();
+    cy.visit(BASE, {
+      onBeforeLoad(win) {
+        Object.defineProperty(win.navigator, 'language', {
+          value: 'de',
+          configurable: true,
+        });
+      },
+    });
+    cy.get('select').should('have.value', 'en');
+    cy.contains('Two-factor. Zero servers.').should('be.visible');
+    cy.contains('button', 'Start').should('be.visible');
+  });
 });
 
 // ---------------------------------------------------------------------------
