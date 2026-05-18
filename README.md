@@ -1,69 +1,59 @@
-# KEY0
+# KEYØ
 
-### 2fa authenticator [webapp](https://KEY0.app/)
+**A private, client-side two-factor authenticator.**
+[KEY0.app](https://KEY0.app/) — No servers. No accounts. No data ever leaves your device.
 
-* Lightweight 
-* Secure
-* Private
+- Lightweight
+- Secure
+- Private
 
+---
 
-## Why use KEY0?
+## Why KEYØ?
 
-[TOTP](https://datatracker.ietf.org/doc/html/rfc6238) is a standard for generating temporary access codes. The idea is that a service provides you with a `secret` that you can store to create temporary access `codes` using an Authenticator app like KEY0.
-When you want to login to the service you will have to provide your credentials and a fresh temporary code.
+[Time-based One-Time Passwords (TOTP)](https://datatracker.ietf.org/doc/html/rfc6238) are a widely adopted standard for two-factor authentication. A service gives you a secret key, and an authenticator app uses it to generate temporary codes that you provide at login.
 
-But,
+Many services promote their own authenticator apps, scattering your secrets across multiple applications. Popular authenticators often include ads, send telemetry, or request unnecessary permissions.
 
-each website promotes its own authenticator, scattering user secrets across multiple applications.
-Popular authenticators include ads, sends user data over the internet or requires unnecessary permissions.
+KEYØ is a free, simple, and lightweight alternative that respects your privacy and keeps your data under your control.
 
-So,
-
-the idea behind KEY0 is to have a free, simple and lightweight authenticator that respects privacy and security.
-
+---
 
 ## Limitations
 
-You can not share your secrets across different devices: you will have to back them up as QR codes, either as an image or a paper printed copy. This is intended.
+- **Secrets are device-local.** KEYØ does not sync across devices. Back up your secrets as QR code images (or printed copies) to transfer them. This is by design.
+- **localStorage is not encrypted.** KEYØ stores your secrets in your browser's [localStorage](https://www.w3schools.com/jsref/prop_win_localstorage.asp) to avoid cookies and remote servers. However, localStorage data is stored in plain text on your filesystem.
+- **Clearing browser data will lose your keys.** If you clear your browser's localStorage, your secrets will be permanently lost. Always maintain backups.
+- **Some services hide their QR codes.** Certain providers promote their own authenticator apps, making their TOTP QR codes harder to find.
 
-If you clear your browser's localStorage, your data WILL BE LOST. Backup your QRs.
+---
 
-Some applications and websites push their own authenticator, which makes the QR code difficult to find.
+## Getting Started
 
+### Prerequisites
 
-## Security concerns
+- [Node.js](https://nodejs.org/) and a package manager such as `npm`.
 
-KEY0 stores your secrets in [localStorage](https://www.w3schools.com/jsref/prop_win_localstorage.asp) to keep everything in the browser and avoid cookies, however localStorage files are not encrypted on your device. If your device is compromised and someone has access to your files they could easily steal your secrets.
+### Commands
 
-Because KEY0 is written is JavaScript, [XSS attacks](https://owasp.org/www-community/attacks/xss/) are still a potential security issue of the language. KEY0 tries to mitigate that by having as minimal interaction as possible with the user and the environment. The only input that could be dangerous is a malicious QR code.
+| Command | Description |
+|---------|-------------|
+| `npm install` | Install dependencies. |
+| `npm run dev` | Start the local development server. |
+| `npm run build` | Create a production build in `./dist`. |
+| `npm run preview` | Serve the production build locally. |
 
-If your secrets are ever compromised, rotate your credentials: generate new QR codes for every application or service that was stored on KEY0 as soon as possible.
+### Testing
 
-##### **TL;DR: Be careful with the QRs that you scan and keep KEY0 on a safe device.**
+| Command | Description |
+|---------|-------------|
+| `npm run test:watch` | Run unit tests in watch mode. |
+| `npm run test:run` | Run unit tests once (headless). |
+| `npm run e2e:open` | Open Cypress for interactive E2E testing (requires dev server). |
+| `npm run e2e:run` | Run E2E tests headless (requires dev server). |
 
+---
 
-## Contributing
+## License
 
-Feel free to open issues and PRs.
-
-
-#### Workflow with [vite](https://vite.dev/):
-
-You need `nodejs` and a dependency manager like `npm`.
-
-
-##### Running locally
-
-* `npm i` install dependencies.
-* `npm run dev` run a local development server.
-* `npm run build` create a production build inside `./dist`.
-* `npm run preview` run a server serving `./dist` content.
-
-
-##### Testing
-
-* `npm run test:watch` interactive unit testing.
-* `npm run test:run` run unit test headless.
-* `npm run e2e:open` interactive end to end testing (requires a server running).
-* `npm run e2e:run` run end to end tests headless (also requires a server running).
-
+[GNU General Public License v3.0](LICENSE)

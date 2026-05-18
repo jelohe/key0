@@ -1,6 +1,7 @@
 import { Component } from 'react';
+import useI18n from '@/useI18n';
 
-export default class ErrorBoundary extends Component {
+class ErrorBoundaryInner extends Component {
   constructor(props) {
     super(props);
     this.state = { error: null };
@@ -15,6 +16,7 @@ export default class ErrorBoundary extends Component {
   }
 
   render() {
+    const { t } = this.props;
     if (this.state.error) {
       return (
         <div style={{
@@ -29,14 +31,14 @@ export default class ErrorBoundary extends Component {
             margin: '0 0 12px',
             color: 'var(--danger)',
           }}>
-            Something went wrong
+            {t('error.title')}
           </h1>
           <p style={{
             color: 'var(--fg-secondary)',
             margin: '0 0 32px',
             fontSize: '15px',
           }}>
-            An unexpected error occurred. Your secrets are safe in local storage.
+            {t('error.message')}
           </p>
           <button
             onClick={() => window.location.reload()}
@@ -51,7 +53,7 @@ export default class ErrorBoundary extends Component {
               cursor: 'pointer',
             }}
           >
-            Reload page
+            {t('error.reload')}
           </button>
         </div>
       );
@@ -59,4 +61,9 @@ export default class ErrorBoundary extends Component {
 
     return this.props.children;
   }
+}
+
+export default function ErrorBoundary({ children }) {
+  const { t } = useI18n();
+  return <ErrorBoundaryInner t={t}>{children}</ErrorBoundaryInner>;
 }

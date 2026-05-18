@@ -119,7 +119,7 @@ export function Backup({ secret }) {
             <QRCode ref={qrRef} value={uri} />
           </div>
           <div className="secret-display">
-            <span className="secret-label">Secret</span>
+            <span className="secret-label">{t('backups.secret-label')}</span>
             <code className="secret-value">{code}</code>
           </div>
         </div>

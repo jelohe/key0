@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import useI18n from '@/useI18n';
 
 const STORAGE_KEY = 'theme';
 
@@ -14,6 +15,7 @@ function applyTheme(theme) {
 }
 
 export default function ThemeToggle() {
+  const { t } = useI18n();
   const [theme, setTheme] = useState(getInitialTheme);
 
   useEffect(() => {
@@ -28,7 +30,7 @@ export default function ThemeToggle() {
   return (
     <button
       onClick={toggle}
-      aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+      aria-label={theme === 'dark' ? t('theme-toggle.light') : t('theme-toggle.dark')}
       style={{
         background: 'none',
         border: 'none',

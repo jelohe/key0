@@ -77,7 +77,7 @@ describe('Keys Page - Empty State', () => {
   });
 
   it('shows the empty-state message when vault has no keys', () => {
-    cy.contains('No keys yet. Scan a QR code to get started.').should('be.visible');
+    cy.contains('No keys yet. Scan a QR code to add your first key.').should('be.visible');
   });
 
   it('"Add Key" button navigates to /scan', () => {
@@ -134,7 +134,7 @@ describe('Keys Page - With Keys', () => {
     cy.contains(SEED_SECRET.app).should('not.exist');
     cy.contains(SEED_SECRET.name).should('not.exist');
     cy.get('[data-testid="key"]').should('not.exist');
-    cy.contains('No keys yet. Scan a QR code to get started.').should('be.visible');
+    cy.contains('No keys yet. Scan a QR code to add your first key.').should('be.visible');
   });
 
   it('Backups button navigates to /backups', () => {
@@ -158,7 +158,7 @@ describe('Scan Page', () => {
   });
 
   it('shows the "Scanner" heading', () => {
-    cy.contains('h1', 'Scanner').should('be.visible');
+    cy.contains('h1', 'Scan QR Code').should('be.visible');
   });
 
   it('shows Cancel and Manual buttons before detection', () => {
@@ -168,7 +168,7 @@ describe('Scan Page', () => {
 
   it('clicking Manual switches to manual upload view', () => {
     cy.contains('button', 'Manual').click();
-    cy.contains('Select a QR image or drag & drop one here').should('be.visible');
+    cy.contains('Upload a QR code image, or drag and drop one here').should('be.visible');
     cy.contains('button', 'Camera').should('be.visible');
     cy.get('video').should('not.exist');
   });
@@ -210,7 +210,7 @@ describe('Scan Page', () => {
   });
 
   it('displays the scan instructions info bar', () => {
-    cy.contains('Scan only QR codes you trust.').should('be.visible');
+    cy.contains('Only scan QR codes from sources you trust.').should('be.visible');
   });
 
   it('detects the QR from the fixture and shows the app name and username', () => {
@@ -220,7 +220,7 @@ describe('Scan Page', () => {
 
   it('shows a warning box after QR is detected', () => {
     cy.contains(FIXTURE_ISSUER, { timeout: 15000 }).should('be.visible');
-    cy.contains('Verify this code before saving').should('be.visible');
+    cy.contains('Verify this account before saving').should('be.visible');
   });
 
   it('shows Reject and Save buttons after detection', () => {
@@ -256,7 +256,7 @@ describe('Backups Page', () => {
   describe('empty vault', () => {
     it('shows the empty state when no keys exist', () => {
       cy.visit(BASE + '/backups', { onBeforeLoad: clearVault });
-      cy.contains('No keys to back up yet. Add a key first.').should('be.visible');
+      cy.contains('No keys to back up yet. Add a key to get started.').should('be.visible');
       cy.contains('button', 'Add Key').should('be.visible');
     });
   });
@@ -392,13 +392,13 @@ describe('Language Selector', () => {
   it('default language is English', () => {
     cy.get('select').should('have.value', 'en');
     cy.contains('Two-factor. Zero servers.').should('be.visible');
-    cy.contains('button', 'Start').should('be.visible');
+    cy.contains('button', 'Open App').should('be.visible');
   });
 
   it('switching to Spanish shows translated text on the landing page', () => {
     cy.get('select').select('es');
     cy.contains('Dos factores. Cero servidores.').should('be.visible');
-    cy.contains('button', 'Empezar').should('be.visible');
+    cy.contains('button', 'Abrir app').should('be.visible');
   });
 
   it('switching back to English shows English text again', () => {
@@ -406,7 +406,7 @@ describe('Language Selector', () => {
     cy.contains('Dos factores. Cero servidores.').should('be.visible');
     cy.get('select').select('en');
     cy.contains('Two-factor. Zero servers.').should('be.visible');
-    cy.contains('button', 'Start').should('be.visible');
+    cy.contains('button', 'Open App').should('be.visible');
   });
 
   it('persists the chosen language across a page reload', () => {
@@ -428,7 +428,7 @@ describe('Language Selector', () => {
     });
     cy.get('select').should('have.value', 'es');
     cy.contains('Dos factores. Cero servidores.').should('be.visible');
-    cy.contains('button', 'Empezar').should('be.visible');
+    cy.contains('button', 'Abrir app').should('be.visible');
   });
 
   it('stored language takes precedence over browser language', () => {
@@ -443,7 +443,7 @@ describe('Language Selector', () => {
     });
     cy.get('select').should('have.value', 'en');
     cy.contains('Two-factor. Zero servers.').should('be.visible');
-    cy.contains('button', 'Start').should('be.visible');
+    cy.contains('button', 'Open App').should('be.visible');
   });
 
   it('falls back to English when browser language is unsupported', () => {
@@ -458,7 +458,7 @@ describe('Language Selector', () => {
     });
     cy.get('select').should('have.value', 'en');
     cy.contains('Two-factor. Zero servers.').should('be.visible');
-    cy.contains('button', 'Start').should('be.visible');
+    cy.contains('button', 'Open App').should('be.visible');
   });
 });
 
@@ -495,7 +495,7 @@ describe('404 Page', () => {
 describe('Edge Cases - Direct Navigation', () => {
   it('navigates directly to /keys (no pre-existing keys)', () => {
     cy.visit(BASE + '/keys');
-    cy.contains('No keys yet. Scan a QR code to get started.').should('be.visible');
+    cy.contains('No keys yet. Scan a QR code to add your first key.').should('be.visible');
     cy.contains('button', 'Add Key').should('be.visible');
   });
 
@@ -510,14 +510,14 @@ describe('Edge Cases - Direct Navigation', () => {
 
   it('navigates directly to /scan renders the scanner', () => {
     cy.visit(BASE + '/scan');
-    cy.contains('h1', 'Scanner').should('be.visible');
+    cy.contains('h1', 'Scan QR Code').should('be.visible');
     cy.contains('button', 'Cancel').should('be.visible');
     cy.contains('button', 'Manual').should('be.visible');
   });
 
   it('navigates directly to /backups (no pre-existing keys)', () => {
     cy.visit(BASE + '/backups', { onBeforeLoad: clearVault });
-    cy.contains('No keys to back up yet. Add a key first.').should('be.visible');
+    cy.contains('No keys to back up yet. Add a key to get started.').should('be.visible');
   });
 
   it('navigates directly to /backups (with pre-existing keys)', () => {
