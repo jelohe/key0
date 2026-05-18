@@ -103,6 +103,30 @@
   font-weight: 500;
 }
 
+.manual-upload-zone {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  border: 2px dashed var(--line);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.manual-upload-zone:hover,
+.manual-upload-zone--drag-over {
+  border-color: var(--primary);
+  background: var(--bg-alt);
+}
+
+.manual-upload-zone svg {
+  color: var(--primary);
+}
+
 .scanner-error svg {
   color: var(--danger);
 }

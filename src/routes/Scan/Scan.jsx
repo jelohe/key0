@@ -4,6 +4,7 @@ import useVault from '@/useVault';
 import useI18n from '@/useI18n';
 import ThemeToggle from '@/ThemeToggle';
 import Scanner from './Scanner';
+import ManualUpload from './ManualUpload';
 import { parse, validate } from '@/parser';
 import './scan.css';
 
@@ -12,6 +13,17 @@ export default function Scan() {
   const navigate = useNavigate();
   const { store } = useVault();
   const [secret, setSecret] = useState();
+  const [scannerKey, setScannerKey] = useState(0);
+  const [mode, setMode] = useState('camera');
+
+  function handleToggleMode() {
+    if (mode === 'camera') {
+      setMode('manual');
+    } else {
+      setScannerKey(k => k + 1);
+      setMode('camera');
+    }
+  }
 
   const handleScan = uris => {
     if (!uris || uris.length === 0) return;
@@ -47,8 +59,11 @@ export default function Scan() {
       <div className="scan-body">
         <div className="scanner-frame">
           {secret && <Found app={secret.app} name={secret.name} />}
-          {!secret &&
-            <Scanner Loading={Loading} Error={Error} onScan={handleScan} />
+          {!secret && mode === 'camera' &&
+            <Scanner key={scannerKey} Loading={Loading} Error={Error} onScan={handleScan} />
+          }
+          {!secret && mode === 'manual' &&
+            <ManualUpload onScan={handleScan} />
           }
         </div>
 
@@ -80,9 +95,15 @@ export default function Scan() {
             <button className="btn-secondary" onClick={handleCancel}>
               {t('scan.cancel-button')}
             </button>
-            <button className="btn-primary">
-              {t("scan.scan-button")}
-            </button>
+            {mode === 'manual' ? (
+              <button className="btn-primary" onClick={handleToggleMode}>
+                {t("scan.camera-button")}
+              </button>
+            ) : (
+              <button className="btn-primary" onClick={handleToggleMode}>
+                {t("scan.scan-button")}
+              </button>
+            )}
           </>
         )}
         {secret && (

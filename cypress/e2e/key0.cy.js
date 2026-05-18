@@ -8,7 +8,7 @@ const BASE = 'https://localhost:3000';
 
 // Values from the fixture QR at cypress/fixtures/key0-qr.mjpeg
 const FIXTURE_ISSUER = 'TopoTestSecret';
-const FIXTURE_NAME = 'Topo:topo-user';
+const FIXTURE_NAME = 'topo-user';
 
 // A pre-seeded secret we can rely on for deterministic vault state
 const SEED_SECRET = { app: 'TestApp', name: 'testuser', code: 'JBSWY3DPEHPK3PXP' };
@@ -40,7 +40,7 @@ describe('Landing Page', () => {
     cy.contains('Two-factor. Zero servers.').should('be.visible');
   });
 
-  it('CTA button "Open Keys" navigates to /keys', () => {
+  it('CTA button "Open" navigates to /keys', () => {
     cy.get('[data-testid="run-key0"]').click();
     cy.location('pathname').should('eq', '/keys');
   });
@@ -161,9 +161,48 @@ describe('Scan Page', () => {
     cy.contains('h1', 'Scanner').should('be.visible');
   });
 
-  it('shows Cancel and Scan buttons before detection', () => {
+  it('shows Cancel and Manual buttons before detection', () => {
     cy.contains('button', 'Cancel').should('be.visible');
-    cy.contains('button', 'Scan').should('be.visible');
+    cy.contains('button', 'Manual').should('be.visible');
+  });
+
+  it('clicking Manual switches to manual upload view', () => {
+    cy.contains('button', 'Manual').click();
+    cy.contains('Select a QR image or drag & drop one here').should('be.visible');
+    cy.contains('button', 'Camera').should('be.visible');
+    cy.get('video').should('not.exist');
+  });
+
+  it('clicking Camera in manual mode returns to camera view', () => {
+    cy.contains('button', 'Manual').click();
+    cy.contains('button', 'Camera').click();
+    cy.contains('button', 'Manual').should('be.visible');
+    cy.get('video').should('exist');
+  });
+
+  it('uploads a QR image via manual mode and detects the secret', () => {
+    cy.contains('button', 'Manual').click();
+    cy.get('[data-testid="manual-file-input"]').selectFile('cypress/fixtures/key0-qr.png', { force: true });
+    cy.contains('key0', { timeout: 10000 }).should('be.visible');
+    cy.contains('janwan').should('be.visible');
+  });
+
+  it('shows Reject and Save buttons after manual upload', () => {
+    cy.contains('button', 'Manual').click();
+    cy.get('[data-testid="manual-file-input"]').selectFile('cypress/fixtures/key0-qr.png', { force: true });
+    cy.contains('key0', { timeout: 10000 }).should('be.visible');
+    cy.contains('button', 'Reject').should('be.visible');
+    cy.get('[data-testid="save-secret"]').should('be.visible');
+  });
+
+  it('saves a secret from manual upload and navigates to /keys', () => {
+    cy.contains('button', 'Manual').click();
+    cy.get('[data-testid="manual-file-input"]').selectFile('cypress/fixtures/key0-qr.png', { force: true });
+    cy.contains('key0', { timeout: 10000 }).should('be.visible');
+    cy.get('[data-testid="save-secret"]').click();
+    cy.location('pathname').should('eq', '/keys');
+    cy.contains('key0').should('be.visible');
+    cy.contains('janwan').should('be.visible');
   });
 
   it('renders a video element for the camera viewfinder', () => {
@@ -346,19 +385,20 @@ describe('Theme Toggle', () => {
 // ---------------------------------------------------------------------------
 describe('Language Selector', () => {
   beforeEach(() => {
+    cy.clearAllLocalStorage();
     cy.visit(BASE);
   });
 
   it('default language is English', () => {
     cy.get('select').should('have.value', 'en');
     cy.contains('Two-factor. Zero servers.').should('be.visible');
-    cy.contains('button', 'Open Keys').should('be.visible');
+    cy.contains('button', 'Start').should('be.visible');
   });
 
   it('switching to Spanish shows translated text on the landing page', () => {
     cy.get('select').select('es');
     cy.contains('Dos factores. Cero servidores.').should('be.visible');
-    cy.contains('button', 'Abrir Claves').should('be.visible');
+    cy.contains('button', 'Empezar').should('be.visible');
   });
 
   it('switching back to English shows English text again', () => {
@@ -366,7 +406,7 @@ describe('Language Selector', () => {
     cy.contains('Dos factores. Cero servidores.').should('be.visible');
     cy.get('select').select('en');
     cy.contains('Two-factor. Zero servers.').should('be.visible');
-    cy.contains('button', 'Open Keys').should('be.visible');
+    cy.contains('button', 'Start').should('be.visible');
   });
 
   it('persists the chosen language across a page reload', () => {
@@ -427,7 +467,7 @@ describe('Edge Cases - Direct Navigation', () => {
     cy.visit(BASE + '/scan');
     cy.contains('h1', 'Scanner').should('be.visible');
     cy.contains('button', 'Cancel').should('be.visible');
-    cy.contains('button', 'Scan').should('be.visible');
+    cy.contains('button', 'Manual').should('be.visible');
   });
 
   it('navigates directly to /backups (no pre-existing keys)', () => {

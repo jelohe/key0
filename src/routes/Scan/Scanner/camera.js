@@ -20,17 +20,10 @@ function open(el) {
   });
 }
 
+import { createDetector } from '../detector';
+
 async function scan(el) {
-  const BarcodeDetector = window.BarcodeDetector;
-  if (!BarcodeDetector) {
-    try {
-      const mod = await import('barcode-detector/polyfill');
-      window.BarcodeDetector = window.BarcodeDetector || mod.BarcodeDetector;
-    } catch {
-      throw new Error('BarcodeDetector not available in this browser');
-    }
-  }
-  const detector = new window.BarcodeDetector({ formats: ["qr_code"] });
+  const detector = await createDetector();
   return detector.detect(el);
 }
 

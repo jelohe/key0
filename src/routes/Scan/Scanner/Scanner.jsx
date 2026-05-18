@@ -25,7 +25,7 @@ export default function Scanner({ onScan = defaultOnScan, Loading, Error }) {
       startPolling();
     }).catch(() => {
       setIsLoading(false);
-      setIsAvailable(false)
+      setIsAvailable(false);
     });
 
     return () => {
