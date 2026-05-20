@@ -443,3 +443,58 @@ describe('Edge Cases - Direct Navigation', () => {
     cy.contains('button', 'Show Secret').should('be.visible');
   });
 });
+
+// ---------------------------------------------------------------------------
+// End-to-End: Export QR → Delete Key → Import QR
+// ---------------------------------------------------------------------------
+describe('Export → Delete → Re-import', () => {
+  const dlFile = `${SEED_SECRET.app}-${SEED_SECRET.name}-key0-qr.png`;
+
+  beforeEach(() => {
+    cy.visit(BASE + '/backups', {
+      onBeforeLoad: (win) => seedSecrets(win, [SEED_SECRET]),
+    });
+  });
+
+  it('exports a QR, deletes the key, then re-imports it from the exported image', () => {
+    // ── Step 1: Export QR from backups ──
+    cy.contains('button', 'Show Secret').click();
+    cy.contains('button', 'Show Secret').click();
+    cy.get('.backup-details svg').should('exist');
+
+    // Click download — browser saves file to cypress/downloads/
+    cy.contains('button', 'Download').click();
+
+    // Wait for the downloaded file to land on disk
+    const dlPath = `cypress/downloads/${dlFile}`;
+    cy.readFile(dlPath, 'binary', { timeout: 10000 }).should((buf) => {
+      expect(buf.length).to.be.greaterThan(200);
+    });
+
+    // ── Step 2: Delete the key ──
+    cy.contains('button', 'Back to Keys').click();
+    cy.location('pathname').should('eq', '/keys');
+
+    cy.get('[data-testid="remove"]').click();
+    cy.get('[data-testid="confirm-remove"]').click();
+    cy.contains('No keys yet.').should('be.visible');
+
+    // ── Step 3: Import the exported QR ──
+    cy.contains('button', 'Add Key').click();
+    cy.location('pathname').should('eq', '/scan');
+
+    cy.contains('button', 'Manual').click();
+    cy.get('[data-testid="manual-file-input"]').selectFile(dlPath, { force: true });
+
+    // ── Step 4: Verify detection and save ──
+    cy.contains(SEED_SECRET.app, { timeout: 10000 }).should('be.visible');
+    cy.contains(SEED_SECRET.name).should('be.visible');
+    cy.get('[data-testid="save-secret"]').click();
+
+    // ── Step 5: Confirm the key is back on /keys ──
+    cy.location('pathname').should('eq', '/keys');
+    cy.contains(SEED_SECRET.app).should('be.visible');
+    cy.contains(SEED_SECRET.name).should('be.visible');
+    cy.get('[data-testid="key"]').should('exist');
+  });
+});

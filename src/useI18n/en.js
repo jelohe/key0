@@ -34,6 +34,7 @@ export default {
   "backups.show-secret": "Show Secret",
   "backups.hide-secret": "Hide Secret",
   "backups.download": "Download",
+  "backups.dl-error": "Failed to generate image.",
 
   "footer.client-side": "100% client-side",
   "footer.privacy": "Your secrets never leave this device.",

@@ -11,6 +11,7 @@ export function Backup({ secret }) {
   const { app, name, code } = secret;
   const uri = `otpauth://totp/${encodeURIComponent(name)}?issuer=${encodeURIComponent(app)}&secret=${encodeURIComponent(code)}`;
   const [stage, setStage] = useState('hidden');
+  const [dlError, setDlError] = useState(false);
   const qrRef = useRef(null);
   function handleDownload() {
     const svgEl = qrRef.current;
@@ -23,13 +24,17 @@ export function Backup({ secret }) {
     const canvas = document.createElement("canvas");
     const ctx = canvas.getContext("2d");
 
+    const viewBox = svgEl.getAttribute('viewBox');
+    const moduleCount = parseInt(viewBox.split(' ')[2], 10);
+
     const img = new window.Image();
     const svgBlob = new Blob([svgString], { type: "image/svg+xml;charset=utf-8" });
     const url = URL.createObjectURL(svgBlob);
 
     img.onload = function () {
       const scale = 4;
-      const border = 10;
+      const moduleSize = img.width / moduleCount;
+      const border = Math.ceil(4 * moduleSize);
       const paddedW = img.width + border * 2;
       const paddedH = img.height + border * 2;
 
@@ -58,6 +63,7 @@ export function Backup({ secret }) {
 
     img.onerror = function () {
       URL.revokeObjectURL(url);
+      setDlError(true);
     };
 
     img.src = url;
@@ -116,7 +122,7 @@ export function Backup({ secret }) {
       {stage === 'revealed' && (<>
         <div className="backup-details">
           <div className="qr-wrapper">
-            <QRCode ref={qrRef} value={uri} />
+            <QRCode ref={qrRef} value={uri} level="M" />
           </div>
           <div className="secret-display">
             <span className="secret-label">Secret</span>
@@ -135,6 +141,7 @@ export function Backup({ secret }) {
               </svg>
               {t("backups.download")}
             </button>
+            {dlError && <p className="backup-dl-error">{t('backups.dl-error')}</p>}
           </div>
         </>
       )}
